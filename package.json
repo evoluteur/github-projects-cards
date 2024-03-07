@@ -1,11 +1,9 @@
 {
-  "name": "evoluteur.github.io",
+  "name": "github-project-cards",
   "version": "1.0.0",
   "description": "Simple web page to fetch and display GitHub projects as cards.",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/evoluteur/evoluteur.github.io.git"
-  },
+  "repository": "github:evoluteur/github-project-cards",
+  "homepage": "https://evoluteur.github.io/github-project-cards/",
   "copyright": "(c) 2024 Olivier Giulieri",
   "author": "Olivier Giulieri (https://evoluteur.github.io/)",
   "license": "MIT",
