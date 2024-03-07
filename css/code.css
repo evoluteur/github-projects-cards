@@ -1,0 +1,71 @@
+#title {
+  text-transform: capitalize;
+}
+.projects {
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: 20px;
+  gap: 16px;
+  font-size: 0.9em;
+}
+.projects > div {
+  flex-grow: 1;
+  background-color: #5594f4;
+  width: 280px;
+  border: 3px solid #0288d1;
+  border-radius: 10px;
+  padding: 10px 20px 20px;
+}
+.projects > div > div > div {
+  padding: 10px 0;
+}
+.crud-icon {
+  position: relative;
+  display: inline-block;
+  padding: 0;
+  box-sizing: border-box;
+  height: 16px;
+  width: 16px;
+  margin: 0 5px;
+  > * {
+    display: inline-block;
+  }
+  svg {
+    fill: white;
+    height: 16px;
+    width: 16px;
+  }
+}
+
+.ico-followers {
+  position: relative;
+  top: 2px;
+  margin-left: 10px;
+}
+#title-stars {
+  margin-left: 30px;
+}
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: baseline;
+  margin-bottom: 20px;
+  input,
+  select {
+    font-size: 16px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+  }
+}
+#summary {
+  margin-left: 20px;
+}
+.noresults {
+  margin: 20px 0;
+  padding: 30px 30px !important;
+}
+.stars {
+  font-size: 1rem;
+  white-space: nowrap;
+}

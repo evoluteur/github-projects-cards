@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Evoluteur at GitHub</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#bbdefb" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Marcellus"
+    />
+    <link href="css/me.css" rel="stylesheet" />
+    <link href="css/code.css" rel="stylesheet" />
+    <script src="js/repos.js"></script>
+  </head>
+
+  <body onload="setupCodePage()">
+    <div class="nav">
+      <a href="https://evoluteur.github.io/">Evoluteur</a> > GitHub Projects
+    </div>
+
+    <section class="c00">
+      <h1 id="title">Loading...</h1>
+
+      <div class="filters">
+        <div>Find: <input type="text" onkeyup="filter(this.value)" /></div>
+        <div>
+          Sort by:
+          <select type="text" onchange="sort(this.value)" id="sortPicker">
+            <options>
+              <option value="name" selected>Name</option>
+              <option value="stargazers_count">Stars</option>
+              <option value="forks_count">Forks</option>
+              <option value="created_at">Created</option>
+              <option value="updated_at">Updated</option>
+            </options>
+          </select>
+        </div>
+        <span id="summary"></span>
+      </div>
+
+      <div id="evoluteur" class="projects"></div>
+      <div id="repos" class="projects"></div>
+      <div id="summary" class="projects"></div>
+    </section>
+
+    <footer>
+      &#169; 2024 <a href="https://evoluteur.github.io/">Olivier Giulieri</a>
+    </footer>
+  </body>
+</html>

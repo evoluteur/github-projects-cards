@@ -1,0 +1,17 @@
+{
+  "name": "evoluteur.github.io",
+  "version": "1.0.0",
+  "description": "Simple web page to fetch and display GitHub projects as cards.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/evoluteur/evoluteur.github.io.git"
+  },
+  "copyright": "(c) 2024 Olivier Giulieri",
+  "author": "Olivier Giulieri (https://evoluteur.github.io/)",
+  "license": "MIT",
+  "keywords": [
+    "github",
+    "project",
+    "portfolio"
+  ]
+}
