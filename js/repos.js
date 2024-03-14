@@ -1,4 +1,4 @@
-const user = "evoluteur"; 
+const user = "evoluteur";
 
 let repos = [];
 let reposSelection = [];
@@ -44,7 +44,7 @@ const links = (r) => {
   }
   if (r.stargazers_count) {
     links.push(
-      `<a href="https://star-history.com/#${user}/${n}" target="sh${n}">Star History</a>`
+      `<a href="https://star-history.com/#${user}/${n}&Date" target="sh${n}">Star History</a>`
     );
   }
   return "<div>" + ln + links.join(" - ") + "</div>";
@@ -74,14 +74,21 @@ const render = (selection) => {
         <span>${name}</span>${stars(r)}
       </h2>
       <div>
-        <div class="desc">${r?.description || name}</div>
         <div>${links(r)}</div>
         <div>${fDate(r.created_at)} -> ${fDate(r.updated_at)}</div>
       </div>
     </div>`;
   });
+  // <div class="desc">${r?.description || name}</div>
   return h.join("");
 };
+
+const allStarsURL = () =>
+  "https://star-history.com/#" +
+  repos
+    .filter((r) => r.stargazers_count)
+    .map((r) => user + "/" + r.name)
+    .join("&");
 
 const total = () => `
 <span class="stars">
@@ -103,5 +110,9 @@ const setupCodePage = async () => {
   // setRepos(render());
   sort(sortField || "name");
   document.getElementById("title").innerHTML =
-    user + ' at GitHub <span id="total-stars">' + total() + "</span>";
+    user +
+    ' at GitHub <span id="total-stars">' +
+    total() +
+    `<a href="${allStarsURL()}">SH</a>` +
+    "</span>";
 };
