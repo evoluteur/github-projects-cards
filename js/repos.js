@@ -60,9 +60,14 @@ const repoIcon = `<svg aria-hidden="true" height="16" viewBox="0 0 16 16" versio
     <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"></path>
     </svg>`;
 
+const linkStars = (repo) =>
+  `<a href="https://github.com/${user}/${repo.name}/stargazers" target="_blank">${starIcon} ${repo.stargazers_count}</a>`;
+const linkForks = (repo) =>
+  `<a href="https://github.com/${user}/${repo.name}/forks" target="_blank">${forkIcon} ${repo.forks_count}</a>`;
+
 const stars = (r) => `<span class="stars">
-${r?.stargazers_count > 0 ? starIcon + r.stargazers_count : ""}
-${r?.forks_count > 0 ? forkIcon + r.forks_count : ""}
+${r?.stargazers_count > 0 ? linkStars(r) : ""}
+${r?.forks_count > 0 ? linkForks(r) : ""}
  </span>`;
 
 const render = (selection) => {
@@ -74,21 +79,14 @@ const render = (selection) => {
         <span>${name}</span>${stars(r)}
       </h2>
       <div>
+       <div class="desc">${r?.description || name}</div>
         <div>${links(r)}</div>
         <div>${fDate(r.created_at)} -> ${fDate(r.updated_at)}</div>
       </div>
     </div>`;
   });
-  // <div class="desc">${r?.description || name}</div>
   return h.join("");
 };
-
-const allStarsURL = () =>
-  "https://star-history.com/#" +
-  repos
-    .filter((r) => r.stargazers_count)
-    .map((r) => user + "/" + r.name)
-    .join("&");
 
 const total = () => `
 <span class="stars">
@@ -110,9 +108,5 @@ const setupCodePage = async () => {
   // setRepos(render());
   sort(sortField || "name");
   document.getElementById("title").innerHTML =
-    user +
-    ' at GitHub <span id="total-stars">' +
-    total() +
-    `<a href="${allStarsURL()}">SH</a>` +
-    "</span>";
+    user + ' at GitHub <span id="total-stars">' + total() + "</span>";
 };
