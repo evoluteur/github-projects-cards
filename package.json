@@ -1,5 +1,5 @@
 {
-  "name": "github-project-cards",
+  "name": "github-projects-cards",
   "version": "1.0.0",
   "description": "Simple web page to fetch and display GitHub projects as cards.",
   "repository": "github:evoluteur/github-project-cards",
@@ -10,6 +10,9 @@
   "keywords": [
     "github",
     "project",
-    "portfolio"
+    "repo",
+    "repository",
+    "portfolio",
+    "cards"
   ]
 }
