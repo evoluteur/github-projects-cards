@@ -11,7 +11,7 @@
 .projects > div {
   flex-grow: 1;
   background-color: #5594f4;
-  width: 280px;
+  width: 300px;
   border: 3px solid #0288d1;
   border-radius: 10px;
   padding: 10px 20px 20px;
@@ -68,4 +68,19 @@
 .stars {
   font-size: 1rem;
   white-space: nowrap;
+  > a {
+    display: block;
+  }
+}
+.pcard-title {
+  display: flex;
+  > span:nth-child(1) {
+    flex-grow: 1;
+  }
+  > span:nth-child(2) {
+    max-width: 100px;
+  }
+}
+svg {
+  fill: white;
 }
