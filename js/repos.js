@@ -80,7 +80,7 @@ const cardHTML = (name, project) => `<div class="project-card">
  <div>
    <div>${linksHTML(project)}</div>
    <div class="desc">${project?.description || name}</div>
-   <div>${fDate(project.created_at)} -> ${fDate(project.updated_at)}</div>
+   <div>${fDate(project.created_at)} - ${fDate(project.updated_at)}</div>
  </div>
 </div>`;
 

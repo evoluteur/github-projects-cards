@@ -7,17 +7,17 @@
   flex-basis: 20px;
   gap: 16px;
   font-size: 0.9em;
-}
-.projects > div {
-  flex-grow: 1;
-  background-color: #5594f4;
-  width: 300px;
-  border: 3px solid #0288d1;
-  border-radius: 10px;
-  padding: 10px 20px 20px;
-}
-.projects > div > div > div {
-  padding: 10px 0;
+  > div {
+    flex-grow: 1;
+    background-color: #5594f4;
+    width: 300px;
+    border: 3px solid #0288d1;
+    border-radius: 10px;
+    padding: 10px 20px 20px;
+    > div > div {
+      padding: 10px 0;
+    }
+  }
 }
 .crud-icon {
   position: relative;
