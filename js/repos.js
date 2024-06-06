@@ -1,3 +1,4 @@
+// config options
 const user = "evoluteur";
 const ghURL = `https://github.com/${user}`;
 const showMTF = true;
@@ -13,6 +14,14 @@ async function fetchProjects() {
   reposStars = 0;
   repos.forEach((r) => (reposStars += r.stargazers_count));
 }
+
+const escapeHtml = (txt) =>
+  txt
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 
 const fDate = (d) => new Date(d).toDateString().substring(4);
 
@@ -74,12 +83,12 @@ ${r?.forks_count > 0 ? linkForks(r) : ""}
 
 const cardHTML = (name, project) => `<div class="project-card">
  <h2 class="pcard-title">
-   <span><a href="${ghURL}/${name}" target="${name}">${name}</a>
+   <span><a href="${ghURL}/${name}" target="${name}">${escapeHtml(name)}</a>
    </span><span>${starsHTML(project)}</span>
  </h2>
  <div>
    <div>${linksHTML(project)}</div>
-   <div class="desc">${project?.description || name}</div>
+   <div class="desc">${escapeHtml(project?.description || name)}</div>
    <div>${fDate(project.created_at)} - ${fDate(project.updated_at)}</div>
  </div>
 </div>`;
@@ -96,9 +105,8 @@ const totalHTML = () =>
 </span>`;
 
 const pageTitleHTML = () =>
-  `<a href="${ghURL}" target="${user}">` +
-  user +
-  '</a> at GitHub <span id="total-stars">' +
+  `<a href="${ghURL}" target="${user}">${escapeHtml(user)}</a>` +
+  ' at GitHub <span id="total-stars">' +
   totalHTML() +
   "</span>";
 
