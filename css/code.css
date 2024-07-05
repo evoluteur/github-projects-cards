@@ -7,15 +7,23 @@
   flex-basis: 20px;
   gap: 16px;
   font-size: 0.9em;
-  > div {
+  > .project-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     flex-grow: 1;
     background-color: #5594f4;
     width: 300px;
     border: 3px solid #0288d1;
     border-radius: 10px;
-    padding: 10px 20px 20px;
-    > div > div {
-      padding: 10px 0;
+    padding: 5px 20px 20px;
+    > div {
+      > h2 {
+        min-height: 56px;
+      }
+      > div {
+        padding: 0 0 10px 0;
+      }
     }
   }
 }

@@ -82,15 +82,17 @@ ${r?.forks_count > 0 ? linkForks(r) : ""}
  </span>`;
 
 const cardHTML = (name, project) => `<div class="project-card">
- <h2 class="pcard-title">
-   <span><a href="${ghURL}/${name}" target="${name}">${escapeHtml(name)}</a>
-   </span><span>${starsHTML(project)}</span>
- </h2>
- <div>
-   <div>${linksHTML(project)}</div>
-   <div class="desc">${escapeHtml(project?.description || name)}</div>
-   <div>${fDate(project.created_at)} - ${fDate(project.updated_at)}</div>
- </div>
+  <div>
+    <h2 class="pcard-title">
+      <span><a href="${ghURL}/${name}" target="${name}">${escapeHtml(
+  name
+)}</a></span>
+      <span>${starsHTML(project)}</span>
+    </h2>
+    <div>${linksHTML(project)}</div>
+    <div class="desc">${escapeHtml(project?.description || name)}</div>
+  </div>
+  <div>${fDate(project.created_at)} - ${fDate(project.updated_at)}</div>
 </div>`;
 
 const totalHTML = () =>
