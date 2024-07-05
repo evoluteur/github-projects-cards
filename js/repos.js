@@ -46,7 +46,7 @@ const sort = (field) => {
 
 const linksHTML = (r) => {
   const n = r.name;
-  const ln = r?.language ? r.language + ": " : "";
+  const ln = r?.language ? `<span class="lang">${r.language}</span>` : "";
   const links = [`<a href="${ghURL}/${n}" target="${n}">Code</a>`];
   if (r?.homepage) {
     links.push(`<a href="${r?.homepage}" target="demo${n}">Demo</a>`);
