@@ -1,6 +1,6 @@
 {
   "name": "github-projects-cards",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Simple web page to fetch and display GitHub projects as cards.",
   "repository": "github:evoluteur/github-projects-cards",
   "homepage": "https://evoluteur.github.io/github-projects-cards/",
