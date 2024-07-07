@@ -24,6 +24,9 @@
       > div {
         padding: 0 0 10px 0;
       }
+      .desc {
+        padding: 10px 0;
+      }
     }
   }
 }
