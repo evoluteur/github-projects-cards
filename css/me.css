@@ -41,7 +41,7 @@ a:hover {
 }
 footer {
   color: #bdcff1;
-  margin: 50px 30px 10px 50px;
+  margin: 50px 20px 10px 20px;
   > a {
     white-space: nowrap;
   }
@@ -63,8 +63,8 @@ footer {
     }
   }
 }
-.c00 {
-  padding: 0 30px 10px 50px;
+.gpc {
+  padding: 0 20px;
 }
 @media print {
   body {
