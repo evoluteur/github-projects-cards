@@ -50,10 +50,18 @@
       <h1 id="title">Loading...</h1>
 
       <div class="filters">
-        <div>Find: <input type="text" onkeyup="filter(this.value)" /></div>
         <div>
-          Sort by:
-          <select type="text" onchange="sort(this.value)" id="sortPicker">
+          <label for="filter">Find</label>
+          <input type="text" onkeyup="filter(this.value)" id="filter" />
+        </div>
+        <div>
+          <label for="sortPicker">Sort by</label>
+          <select
+            type="text"
+            onchange="sort(this.value)"
+            name="sortPicker"
+            id="sortPicker"
+          >
             <options>
               <option value="name" selected>Name</option>
               <option value="stargazers_count">Stars</option>
