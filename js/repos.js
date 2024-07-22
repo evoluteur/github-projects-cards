@@ -56,7 +56,7 @@ const linksHTML = (r) => {
       `<a href="https://star-history.com/#${user}/${n}&Date" target="sh${n}">Star History</a>`
     );
   }
-  return "<div>" + ln + links.join(" - ") + "</div>";
+  return ln + links.join(" - ");
 };
 
 const icoStar = `<span class="crud-icon">
@@ -89,7 +89,7 @@ const cardHTML = (name, project) => `<div class="project-card">
 )}</a></span>
       <span>${starsHTML(project)}</span>
     </h2>
-    <div>${linksHTML(project)}</div>
+    <div class="p-links">${linksHTML(project)}</div>
     <div class="desc">${escapeHtml(project?.description || name)}</div>
   </div>
   <div>${fDate(project.created_at)} - ${fDate(project.updated_at)}</div>

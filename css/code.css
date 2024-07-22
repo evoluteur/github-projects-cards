@@ -28,6 +28,10 @@
         padding: 10px 0;
       }
     }
+    .p-links > a {
+      display: inline-block;
+      margin-top: 5px;
+    }
   }
 }
 .lang {
