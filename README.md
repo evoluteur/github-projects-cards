@@ -17,5 +17,10 @@ GitHub-Projects-Cards is Open source at [GitHub](https://github.com/evoluteur/gi
 
 For more ways to look at your GitHub projects checkout my other project [Meet-the-Fans](https://github.com/evoluteur/meet-the-fans) ([demo](https://evoluteur.github.io/meet-the-fans/)) to query and visualize the network graph of your GitHub repositories, followers, stargazers, and forks (using [GitHub GraphQL API](https://docs.github.com/en/graphql) and [D3](https://d3js.org/)).
 
+Get the [Cool Code Ninja T-Shirt](https://www.redbubble.com/i/t-shirt/Cool-Code-Ninja-by-evoluteur/163497552.A5PYK).
+
+[![Screenshot](cool-code-ninja.jpg)](https://www.redbubble.com/i/t-shirt/Cool-Code-Ninja-by-evoluteur/163497552.A5PYK)
+
+
 Copyright (c) 2024 [Olivier Giulieri](https://evoluteur.github.io/).
 
