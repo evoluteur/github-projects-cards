@@ -53,7 +53,7 @@ const linksHTML = (r) => {
   }
   if (r.stargazers_count) {
     links.push(
-      `<a href="https://star-history.com/#${user}/${n}&Date" target="sh${n}">Star History</a>`
+      `<a href="https://star-history.com/#${user}/${n}" target="sh${n}">Star History</a>`
     );
   }
   return ln + links.join(" - ");
@@ -107,10 +107,9 @@ const totalHTML = () =>
 </span>`;
 
 const pageTitleHTML = () =>
-  `<a href="${ghURL}" target="${user}">${escapeHtml(user)}</a>` +
-  ' at GitHub <span id="total-stars">' +
-  totalHTML() +
-  "</span>";
+  `<a href="${ghURL}" target="${user}">${escapeHtml(user)}</a>
+  at GitHub
+  <span id="total-stars">${totalHTML()}</span>`;
 
 const render = (selection) => {
   const sel = selection || reposSelection;
