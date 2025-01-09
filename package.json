@@ -4,7 +4,7 @@
   "description": "Simple web page to fetch and display GitHub projects as cards.",
   "repository": "github:evoluteur/github-projects-cards",
   "homepage": "https://evoluteur.github.io/github-projects-cards/",
-  "copyright": "(c) 2024 Olivier Giulieri",
+  "copyright": "(c) 2025 Olivier Giulieri",
   "author": "Olivier Giulieri (https://evoluteur.github.io/)",
   "license": "MIT",
   "keywords": [
