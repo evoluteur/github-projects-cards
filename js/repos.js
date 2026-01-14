@@ -8,7 +8,9 @@ let reposSelection = [];
 let reposCount = 0;
 
 async function fetchProjects() {
-  const response = await fetch(`https://api.github.com/users/${user}/repos`);
+  const response = await fetch(
+    `https://api.github.com/users/${user}/repos?per_page=100`
+  );
   repos = reposSelection = await response.json();
   reposCount = repos.length;
   reposStars = 0;
