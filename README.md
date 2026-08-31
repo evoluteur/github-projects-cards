@@ -16,4 +16,6 @@ GitHub-Projects-Cards is Open source at [GitHub](https://github.com/evoluteur/gi
 
 For more ways to look at your GitHub projects checkout my other project [Meet-the-Fans](https://github.com/evoluteur/meet-the-fans) ([demo](https://evoluteur.github.io/meet-the-fans/)) to query and visualize the network graph of your GitHub repositories, followers, stargazers, and forks (using [GitHub GraphQL API](https://docs.github.com/en/graphql) and [D3](https://d3js.org/)).
 
+To see how your published packages are doing, check out [npm-Pulse](https://github.com/evoluteur/npm-pulse) ([demo](https://evoluteur.github.io/npm-pulse/)) for the downloads, weekly sparklines, and trends of all your npm packages on a single page.
+
 Copyright (c) 2026 [Olivier Giulieri](https://evoluteur.github.io/).
