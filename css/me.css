@@ -90,6 +90,15 @@ footer {
       color: var(--nav-link-hover);
     }
   }
+  /* code.css has a global "svg { fill: currentColor }" that beats the icons'
+     own fill attribute: it turned the outline evol-blue spiral into a blob.
+     Give the icons back the fill they declare. */
+  svg {
+    fill: currentColor;
+    &[fill="none"] {
+      fill: none;
+    }
+  }
 }
 
 /* the nav bar spans the full width, the content clears the background
@@ -112,6 +121,14 @@ footer {
   color: var(--nav-link);
   &:hover {
     color: var(--nav-link-hover);
+  }
+  /* set fill on the path itself (the global svg rule in code.css would
+     otherwise paint it with the wrong color) */
+  svg path {
+    fill: var(--nav-link);
+  }
+  &:hover svg path {
+    fill: var(--nav-link-hover);
   }
 }
 
