@@ -1,0 +1,290 @@
+/*
+  GitHub-Projects-Cards - charts page
+  Colors come from the theme loaded in css/themes (see js/theme.js).
+*/
+
+.charts-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.chart-card {
+  flex: 1 1 420px;
+  min-width: 0;
+  max-width: 100%;
+  background: var(--panel-bg);
+  color: var(--panel-text);
+  border-radius: 10px;
+  border: 3px solid var(--panel-border);
+  padding: 16px 20px 20px;
+  box-sizing: border-box;
+}
+.chart-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.chart-head-tools {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--panel-muted);
+  > input[type="date"] {
+    font-family: inherit;
+    font-size: 0.85rem;
+    padding: 3px 6px;
+    color: var(--panel-text);
+    background-color: transparent;
+    border: 1px solid var(--panel-grid);
+    border-radius: 6px;
+    &:hover,
+    &:focus {
+      border-color: var(--panel-link);
+      outline: none;
+    }
+  }
+}
+.chart-toggle {
+  display: inline-flex;
+  gap: 4px;
+  > button {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    background: none;
+    color: var(--panel-muted);
+    svg {
+      height: 18px;
+      width: 18px;
+      fill: currentColor;
+    }
+    &:hover {
+      color: var(--panel-text);
+    }
+    &.selected {
+      color: var(--panel-text);
+      border-color: var(--panel-grid);
+    }
+  }
+}
+.chart-card h2 {
+  color: var(--panel-text);
+  font-family: inherit;
+  font-size: 1.1rem;
+  margin: 0 0 12px;
+}
+.chart-card.wide {
+  flex-basis: 100%;
+}
+.chart-wrap {
+  position: relative;
+  height: 280px;
+}
+
+/* stars history: the projects on the left, the chart on the right */
+.stars-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin: 20px 0 40px;
+  align-items: flex-start;
+}
+.stars-picker {
+  flex: 1 1 260px;
+  max-width: 340px;
+  box-sizing: border-box;
+  padding: 16px 20px 20px;
+  border: 3px solid var(--panel-border);
+  border-radius: 10px;
+  background: var(--panel-bg);
+  color: var(--panel-text);
+}
+.stars-picker-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  > h2 {
+    color: var(--panel-text);
+    font-size: 1.1rem;
+    margin: 0 0 12px;
+  }
+}
+.stars-picker-tools > button {
+  font-family: inherit;
+  font-size: 0.8rem;
+  margin-left: 6px;
+  padding: 3px 10px;
+  cursor: pointer;
+  color: var(--panel-text);
+  background: none;
+  border: 1px solid var(--panel-grid);
+  border-radius: 6px;
+  &:hover {
+    border-color: var(--panel-link);
+  }
+}
+.repo-picker {
+  max-height: 420px;
+  overflow: auto;
+}
+.repo-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: 0.85rem;
+  cursor: pointer;
+  > input {
+    accent-color: var(--panel-link);
+  }
+}
+.repo-swatch {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+.repo-check-name {
+  flex: 1 1 auto;
+  overflow-wrap: anywhere;
+}
+.repo-check-stars {
+  flex: none;
+  color: var(--panel-muted);
+}
+.token-box {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--panel-grid);
+  font-size: 0.78rem;
+  color: var(--panel-muted);
+  > label {
+    display: block;
+    margin-bottom: 4px;
+  }
+  > input {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    color: var(--panel-text);
+    background-color: transparent;
+    border: 1px solid var(--panel-grid);
+    border-radius: 6px;
+    &:focus {
+      border-color: var(--panel-link);
+      outline: none;
+    }
+  }
+  > p {
+    margin: 6px 0 0;
+    line-height: 1.35;
+  }
+  a {
+    color: var(--panel-link);
+  }
+}
+/* the loading or error line sits right under the card title */
+#starsStatus {
+  margin: 20px 0 10px;
+  &:empty {
+    display: none;
+  }
+}
+.stars-chart-card {
+  flex: 3 1 420px;
+  > .chart-wrap {
+    height: 420px;
+  }
+}
+
+/* bars and pie are the same boxes, morphed with CSS transitions
+   (ported from react-morph-charts) */
+.morph {
+  position: relative;
+  width: 100%;
+  height: 250px;
+}
+.chart-table {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+}
+[hidden] {
+  display: none !important;
+}
+.morph-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 6px;
+  text-align: center;
+  contain: layout style paint;
+  transition:
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    clip-path 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.morph.no-transition .morph-item,
+.morph.no-transition .morph-label {
+  transition: none;
+}
+.morph-label {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 2px;
+  font-size: 0.72rem;
+  line-height: 1.15;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.morph-name {
+  overflow-wrap: anywhere;
+}
+.morph-value {
+  font-size: 0.9em;
+  opacity: 0.85;
+}
+.morph-item.narrow .morph-name {
+  display: none;
+}
+.morph-item.tiny .morph-label {
+  display: none;
+}
+.chart-card details {
+  margin-top: 14px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: var(--panel-muted);
+}
+.chart-card summary {
+  cursor: pointer;
+  color: var(--panel-link);
+}
+.chart-card table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  font-size: 0.85rem;
+}
+.chart-card th,
+.chart-card td {
+  text-align: left;
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--panel-grid);
+}

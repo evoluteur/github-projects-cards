@@ -1,74 +1,123 @@
 /*
   https://evoluteur.github.io/
   (c) 2026 Olivier Giulieri
+
+  Layout only - every color comes from the theme loaded in css/themes
+  (see js/theme.js and https://evoluteur.github.io/omg-themes/).
  */
 
 html {
   margin: 0;
   padding: 0;
-  scroll-behavior: smooth;
-  background: #0288d1 url("spirals.png");
 }
 body {
   margin: 0;
   padding: 0;
-  font-family: "Marcellus", serif;
+  font-family: "Overpass", sans-serif;
   font-size: 20px;
   font-weight: 300;
   line-height: 1.4em;
-  color: white;
   overflow-x: hidden;
 }
 h1,
 h2 {
-  color: #ffcc80;
+  color: var(--heading);
 }
 h1 {
   font-size: 2.5rem;
 }
 a,
 a:visited {
-  color: #ffb74d;
+  color: var(--link);
   text-decoration: none;
   font-weight: 400;
-  /* background-color: #2b88d2; */
 }
 a:active,
 a:hover {
-  color: #ffcc80;
+  color: var(--link-hover);
   text-decoration: underline;
   font-weight: 400;
 }
 footer {
-  color: #bdcff1;
-  margin: 50px 20px 10px 20px;
+  color: var(--muted);
+  margin: 50px 20px 10px calc(20px + var(--content-left, 0px));
   > a {
     white-space: nowrap;
   }
   &:hover {
-    color: white;
+    color: var(--text);
   }
 }
 
 .nav {
-  color: white;
-  background-color: #1a1a1a;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--nav-text);
+  background-color: var(--nav-bg);
   padding: 8px 10px;
-  > a {
-    color: #92cddc;
-    background-color: #1a1a1a !important;
+  /* the breadcrumb only: the theme picker keeps its own swatch colors */
+  .crumbs a {
+    color: var(--nav-link);
+    background-color: inherit !important;
     text-decoration: none;
     &:hover {
-      color: #ff9900;
+      color: var(--nav-link-hover);
     }
   }
 }
+
+/* theme picker, same widget as OMG Themes */
+#omg-theme-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  > a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    color: var(--nav-link);
+    &:hover {
+      color: var(--nav-link-hover);
+    }
+    &.selected {
+      color: var(--nav-link-hover);
+    }
+  }
+}
+
+/* the nav bar spans the full width, the content clears the background
+   stripe of the light and dark themes */
 .gpc {
   padding: 0 20px;
+  padding-left: calc(20px + var(--content-left, 0px));
 }
+
+/* wraps the theme picker and the GitHub link on the right of the nav bar */
+.nav-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 34px;
+}
+
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  color: var(--nav-link);
+  &:hover {
+    color: var(--nav-link-hover);
+  }
+}
+
 @media print {
-  body {
-    color: #1a1a1a !important;
+  .nav-right {
+    display: none;
   }
   @page {
     margin: 1cm 1cm;

@@ -1,0 +1,78 @@
+/*
+  evol-blue theme
+  Copied from OMG Themes - https://evoluteur.github.io/omg-themes/
+  (c) 2026 Olivier Giulieri
+*/
+:root {
+  --content-left: 0px;
+  --text: white;
+  --muted: #bbdefb;
+  --heading: #e08a00; /* darker than the light-orange accent, for contrast on the blue background */
+  --link: #ffb74d;
+  --link-hover: #ffcc80;
+  --icon-current: white; /* the icon of the page you are on */
+
+  --nav-bg: #1a1a1a;
+  --nav-text: white;
+  --nav-link: #92cddc;
+  --nav-link-hover: #ff9900;
+
+  --card-bg: #5594f4;
+  --card-border: #0288d1;
+  --card-foot: #dbe9ff;
+  --card-strong: white;
+
+  --accent: #ffcc80;
+  --accent-soft: rgba(255, 255, 255, 0.22);
+  /* downloads over the picked period */
+  --period-bar: rgba(255, 255, 255, 0.55);
+  --grid: rgba(255, 255, 255, 0.25);
+  --up: #b9f6ca;
+  --down: #ffcdd2;
+  --fork: #c5a3ff;
+
+  --input-bg: white;
+  --input-text: #1a1a1a;
+  --input-border: #0288d1;
+
+  /* chart panels look like the project cards */
+  --panel-bg: #5594f4;
+  --panel-text: white;
+  --panel-border: #0288d1;
+  --panel-muted: #dbe9ff;
+  --panel-link: #ffb74d;
+  --panel-grid: rgba(255, 255, 255, 0.25);
+  --chart-1: #ffcc80;
+  --chart-2: #4527a0;
+}
+
+html {
+  scroll-behavior: smooth;
+  color: var(--text);
+  background-color: #0288d1;
+  background-image: url("spirals.png");
+  background-repeat: repeat;
+}
+body {
+  font-family: "Overpass", sans-serif;
+  color: var(--text);
+}
+a,
+a:visited {
+  color: var(--link);
+}
+a:active,
+a:hover {
+  color: var(--link-hover);
+}
+
+/* title gradient, same effect as the dark theme but keeping this
+   theme's own accent color (like react-morph-charts' omg theme) */
+h1,
+h2,
+h3 {
+  background: linear-gradient(white, var(--heading));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

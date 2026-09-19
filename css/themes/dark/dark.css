@@ -1,0 +1,76 @@
+/*
+  dark theme
+  Copied from OMG Themes - https://evoluteur.github.io/omg-themes/
+  (c) 2026 Olivier Giulieri
+*/
+:root {
+  --content-left: 30px;
+  --text: #e6ecf5;
+  --muted: #9fb0c8;
+  --heading: #ffcc80;
+  --link: #ffb74d;
+  --link-hover: #ffcc80;
+  --icon-current: white; /* the icon of the page you are on */
+
+  --nav-bg: #11161f;
+  --nav-text: #e6ecf5;
+  --nav-link: #92cddc;
+  --nav-link-hover: #ff9900;
+
+  --card-bg: #2d3848;
+  --card-border: #3c4a5f;
+  --card-foot: #b7c4d6;
+  --card-strong: white;
+
+  --accent: #ffcc80;
+  --accent-soft: rgba(255, 204, 128, 0.18);
+  /* downloads over the picked period */
+  --period-bar: #90caf9;
+  --grid: rgba(255, 255, 255, 0.18);
+  --up: #7fe3a5;
+  --down: #ff9aa8;
+  --fork: #b39ddb;
+
+  --input-bg: #2d3848;
+  --input-text: #e6ecf5;
+  --input-border: #3c4a5f;
+
+  --panel-bg: #2d3848;
+  --panel-text: #e6ecf5;
+  --panel-border: #3c4a5f;
+  --panel-muted: #9fb0c8;
+  --panel-link: #70ade6;
+  --panel-grid: rgba(255, 255, 255, 0.15);
+  --chart-1: #70ade6;
+  --chart-2: #ffa500;
+}
+
+html {
+  scroll-behavior: smooth;
+  color: var(--text);
+  background-color: #1a212d;
+  background-image: url("bg0.png");
+  background-repeat: repeat-y;
+}
+body {
+  font-family: "Overpass", sans-serif;
+  color: var(--text);
+}
+a,
+a:visited {
+  color: var(--link);
+}
+a:active,
+a:hover {
+  color: var(--link-hover);
+}
+
+/* title gradient, same colors as react-morph-charts dark theme */
+h1,
+h2,
+h3 {
+  background: linear-gradient(white, #70ade6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

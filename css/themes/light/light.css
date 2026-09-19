@@ -1,0 +1,65 @@
+/*
+  light theme
+  Copied from OMG Themes - https://evoluteur.github.io/omg-themes/
+  (c) 2026 Olivier Giulieri
+*/
+:root {
+  --content-left: 30px;
+  --text: #1a212d;
+  --muted: #52617a;
+  --heading: #17335c;
+  --link: navy;
+  --link-hover: black;
+  --icon-current: black; /* the icon of the page you are on */
+
+  --nav-bg: #1a1a1a;
+  --nav-text: #f4f6fa;
+  --nav-link: #92cddc;
+  --nav-link-hover: #ff9900;
+
+  --card-bg: white;
+  --card-border: #d0d7de;
+  --card-foot: #52617a;
+  --card-strong: #1a212d;
+
+  --accent: #e08a00;
+  --accent-soft: rgba(224, 138, 0, 0.18);
+  --period-bar: #4e79a7; /* downloads over the picked period */
+  --grid: rgba(0, 0, 0, 0.12);
+  --up: #1a7f37;
+  --down: #cf222e;
+  --fork: #6f42c1;
+
+  --input-bg: white;
+  --input-text: #1a212d;
+  --input-border: #d0d7de;
+
+  --panel-bg: white;
+  --panel-text: #0b0b0b;
+  --panel-border: #d0d7de;
+  --panel-muted: #52514e;
+  --panel-link: #256abf;
+  --panel-grid: #e1e0d9;
+  --chart-1: #2a78d6;
+  --chart-2: #eb6834;
+}
+
+html {
+  scroll-behavior: smooth;
+  color: var(--text);
+  background-color: #fdfdff;
+  background-image: url("bg0.png");
+  background-repeat: repeat-y;
+}
+body {
+  font-family: "Overpass", sans-serif;
+  color: var(--text);
+}
+a,
+a:visited {
+  color: var(--link);
+}
+a:active,
+a:hover {
+  color: var(--link-hover);
+}

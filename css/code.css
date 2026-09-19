@@ -1,5 +1,111 @@
-#title > a {
+/*
+  GitHub-Projects-Cards
+  https://evoluteur.github.io/github-projects-cards/
+  (c) 2026 Olivier Giulieri
+
+  Colors come from the theme loaded in css/themes (see js/theme.js).
+*/
+
+#title,
+#chartsTitle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+#title-main > a {
   text-transform: capitalize;
+}
+.user-input {
+  font-family: inherit;
+  font-size: 2.5rem;
+  font-weight: inherit;
+  line-height: inherit;
+  color: var(--heading);
+  text-transform: capitalize;
+  background: transparent;
+  border: none;
+  border-bottom: 2px dashed transparent;
+  padding: 0;
+}
+.user-input:hover,
+.user-input:focus {
+  border-bottom-color: var(--heading);
+  outline: none;
+}
+.site-picker {
+  /* sized to the selected option where the browser supports it */
+  field-sizing: content;
+  font-family: inherit;
+  font-size: 2.5rem;
+  font-weight: inherit;
+  line-height: inherit;
+  color: var(--heading);
+  background: transparent;
+  border: none;
+  border-bottom: 2px dashed transparent;
+  padding: 0;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    border-bottom-color: var(--heading);
+    outline: none;
+  }
+  > option {
+    font-size: 1rem;
+    color: var(--input-text);
+    background-color: var(--input-bg);
+  }
+}
+.user-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.edit-icon {
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--heading);
+}
+.edit-icon:hover {
+  color: var(--text);
+}
+.edit-icon svg {
+  fill: currentColor;
+  width: 18px;
+  height: 18px;
+}
+.header-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+/* Meet-the-Fans, in the title next to the site picker */
+.fans-link {
+  margin-left: 6px;
+  vertical-align: -3px;
+}
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  svg {
+    height: 24px;
+    width: 24px;
+  }
+  svg {
+    fill: var(--link);
+  }
+  &:hover svg {
+    fill: var(--link-hover);
+  }
+  &.current svg {
+    fill: var(--icon-current);
+  }
 }
 .projects {
   display: flex;
@@ -12,9 +118,9 @@
     flex-direction: column;
     justify-content: space-between;
     flex-grow: 1;
-    background-color: #5594f4;
+    background-color: var(--card-bg);
     width: 300px;
-    border: 3px solid #0288d1;
+    border: 3px solid var(--card-border);
     border-radius: 10px;
     padding: 5px 20px 20px;
     > div {
@@ -34,11 +140,32 @@
     }
   }
 }
+.repo-stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 2px;
+  font-size: 0.85em;
+}
 .lang {
-  margin-right: 10px;
-  padding: 5px 10px;
-  border-radius: 10px;
-  border: solid 1px white;
+  display: inline-flex;
+  align-items: center;
+}
+.lang-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 6px;
+  border-radius: 50%;
+}
+.stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  > .crud-icon {
+    margin: 0;
+  }
 }
 .crud-icon {
   position: relative;
@@ -52,7 +179,8 @@
     display: inline-block;
   }
   svg {
-    fill: white;
+    display: block; /* no baseline gap under the icon */
+    fill: currentColor;
     height: 16px;
     width: 16px;
   }
@@ -77,27 +205,45 @@
   }
   input,
   select {
+    font-family: inherit;
     font-size: 16px;
     padding: 5px 10px;
     margin-bottom: 10px;
+    color: var(--input-text);
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
   }
 }
 #summary {
   margin-left: 20px;
+  color: var(--muted);
 }
 .noresults {
   margin: 20px 0;
   padding: 30px 30px !important;
 }
+/* icon and number centered on each other, in the cards and in the title */
 .stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
   font-size: 1rem;
   white-space: nowrap;
-  > a {
-    display: block;
+  color: var(--text);
+  > span,
+  > span > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .crud-icon {
+    margin: 0;
   }
 }
 .pcard-title {
   display: flex;
+  margin-bottom: 0;
   > span:nth-child(1) {
     flex-grow: 1;
   }
@@ -106,5 +252,5 @@
   }
 }
 svg {
-  fill: white;
+  fill: currentColor;
 }
