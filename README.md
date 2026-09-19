@@ -17,7 +17,9 @@ You can change the GitHub user displayed on the page by clicking its name in the
 
 You can also change the default "user" value (at the top of the [/js/repo.js](https://github.com/evoluteur/github-projects-cards/blob/main/js/repos.js) file) to display your projects instead of mine...
 
-GitHub-Projects-Cards is Open source at [GitHub](https://github.com/evoluteur/github-projects-cards) with MIT license.
+GitHub-Projects-Cards is open source at [GitHub](https://github.com/evoluteur/github-projects-cards) with [MIT license](LICENSE).
+
+Encourage this project by [becoming a sponsor](https://github.com/sponsors/evoluteur).
 
 For more ways to look at your GitHub projects checkout my other project [Meet-the-Fans](https://github.com/evoluteur/meet-the-fans) ([demo](https://evoluteur.github.io/meet-the-fans/)) to query and visualize the network graph of your GitHub repositories, followers, stargazers, and forks (using [GitHub GraphQL API](https://docs.github.com/en/graphql) and [D3](https://d3js.org/)).
 
