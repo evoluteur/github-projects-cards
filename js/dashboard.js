@@ -658,7 +658,7 @@ const renderTimelineChart = () => {
   }
   // the card grows with the number of projects, a squeezed bar is unreadable
   const wrap = document.getElementById("wrapTimeline");
-  wrap.style.height = `${Math.max(280, chartData.labels.length * 24 + 50)}px`;
+  wrap.style.height = `${Math.max(280, chartData.labels.length * 24 + 75)}px`;
   const flat = chartData.data.flat();
   const firstYear = new Date(Math.min(...flat)).getFullYear();
   const lastYear = new Date(Math.max(...flat)).getFullYear();
@@ -697,6 +697,22 @@ const renderTimelineChart = () => {
           min: years[0],
           max: years[years.length - 1],
           grid: { display: true },
+          afterBuildTicks: (axis) => {
+            axis.ticks = years.map((value) => ({ value }));
+          },
+          ticks: {
+            maxRotation: 0,
+            autoSkip: false,
+            callback: (value) => new Date(value).getFullYear(),
+          },
+        },
+        // same year axis repeated on top, handy when the list is long
+        xTop: {
+          axis: "x",
+          position: "top",
+          min: years[0],
+          max: years[years.length - 1],
+          grid: { display: false },
           afterBuildTicks: (axis) => {
             axis.ticks = years.map((value) => ({ value }));
           },
