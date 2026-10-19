@@ -44,29 +44,6 @@ footer {
   > a {
     white-space: nowrap;
   }
-  &:hover {
-    color: var(--text);
-  }
-}
-
-.nav {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  color: var(--nav-text);
-  background-color: var(--nav-bg);
-  padding: 8px 10px;
-  /* the breadcrumb only: the theme picker keeps its own swatch colors */
-  .crumbs a {
-    color: var(--nav-link);
-    background-color: inherit !important;
-    text-decoration: none;
-    &:hover {
-      color: var(--nav-link-hover);
-    }
-  }
 }
 
 /* theme picker, same widget as OMG Themes */
@@ -82,7 +59,7 @@ footer {
     width: 28px;
     border-radius: 50%;
     border: 1px solid transparent;
-    color: var(--nav-link);
+    color: var(--muted);
     &:hover {
       color: var(--nav-link-hover);
     }
@@ -101,31 +78,43 @@ footer {
   }
 }
 
-/* the nav bar spans the full width, the content clears the background
-   stripe of the light and dark themes */
+/* the content clears the background stripe of the light and dark themes */
 .gpc {
   padding: 0 20px;
   padding-left: calc(20px + var(--content-left, 0px));
 }
 
-/* wraps the theme picker and the GitHub link on the right of the nav bar */
+/* the theme picker and the GitHub link, in the top right corner of the page,
+   so the title starts at the top */
 .nav-right {
-  display: inline-flex;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  z-index: 1;
+  display: flex;
   align-items: center;
-  gap: 34px;
+  gap: 24px;
+}
+/* on narrow screens, a row of their own above the title */
+@media only screen and (max-width: 760px) {
+  .nav-right {
+    position: static;
+    justify-content: flex-end;
+    padding: 10px 20px 0;
+  }
 }
 
 .github-link {
   display: inline-flex;
   align-items: center;
-  color: var(--nav-link);
+  color: var(--muted);
   &:hover {
     color: var(--nav-link-hover);
   }
   /* set fill on the path itself (the global svg rule in code.css would
      otherwise paint it with the wrong color) */
   svg path {
-    fill: var(--nav-link);
+    fill: var(--muted);
   }
   &:hover svg path {
     fill: var(--nav-link-hover);

@@ -15,13 +15,16 @@ Check out the [charts dashboard](https://evoluteur.github.io/github-projects-car
 
 You can change the GitHub user displayed on the page by clicking its name in the title and typing a different one, or by adding a `?user=` parameter to the page URL (e.g. `?user=torvalds`) - the same parameter works on the charts dashboard too.
 
-You can also change the default "user" value (at the top of the [/js/repo.js](https://github.com/evoluteur/github-projects-cards/blob/main/js/repos.js) file) to display your projects instead of mine...
+You can also change the default "user" value (at the top of the [/js/repos.js](https://github.com/evoluteur/github-projects-cards/blob/main/js/repos.js) file) to display your projects instead of mine...
 
 GitHub-Projects-Cards is open source at [GitHub](https://github.com/evoluteur/github-projects-cards) with [MIT license](LICENSE).
 
 Encourage this project by [becoming a sponsor](https://github.com/sponsors/evoluteur).
 
-For more ways to look at your GitHub projects checkout my other project [Meet-the-Fans](https://github.com/evoluteur/meet-the-fans) ([demo](https://evoluteur.github.io/meet-the-fans/)) to query and visualize the network graph of your GitHub repositories, followers, stargazers, and forks (using [GitHub GraphQL API](https://docs.github.com/en/graphql) and [D3](https://d3js.org/)).
+For more ways to look at your GitHub projects, check out:
+
+- [Meet-the-Fans](https://github.com/evoluteur/meet-the-fans) ([demo](https://evoluteur.github.io/meet-the-fans/)) to query and visualize the network graph of your GitHub repositories, followers, stargazers, and forks (using [GitHub GraphQL API](https://docs.github.com/en/graphql) and [D3](https://d3js.org/)).
+- [Repo-Atlas](https://github.com/evoluteur/repo-atlas) ([demo](https://evoluteur.github.io/repo-atlas/)) to map your repositories by topic, see stars over time, and flag the popular-but-stale ones.
 
 To see how your published packages are doing, check out [npm-Pulse](https://github.com/evoluteur/npm-pulse) ([demo](https://evoluteur.github.io/npm-pulse/)) for the downloads, weekly sparklines, and trends of all your npm packages on a single page.
 

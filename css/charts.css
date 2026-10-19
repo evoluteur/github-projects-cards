@@ -33,7 +33,8 @@
   gap: 8px;
   font-size: 0.85rem;
   color: var(--panel-muted);
-  > input[type="date"] {
+  > input[type="date"],
+  > select {
     font-family: inherit;
     font-size: 0.85rem;
     padding: 3px 6px;
@@ -265,6 +266,24 @@
 }
 .morph-item.tiny .morph-label {
   display: none;
+}
+/* tooltip of the bars and pie, looks like the Chart.js one */
+.morph-tip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+  white-space: nowrap;
 }
 .chart-card details {
   margin-top: 14px;

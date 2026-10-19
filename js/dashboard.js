@@ -240,7 +240,7 @@ const languageChartData = () => {
   };
 };
 
-const starsChartData = (limit = 10) => {
+const starsChartData = (limit = 15) => {
   const top = [...repos]
     .filter((r) => r.stargazers_count > 0)
     .sort((a, b) => b.stargazers_count - a.stargazers_count)
@@ -281,10 +281,49 @@ const activityChartData = () => {
   };
 };
 
-// each project as a span, from the day it started to its last update
+// how the projects are ordered in the timeline chart
+const TIMELINE_SORTS = {
+  created: (a, b) => new Date(a.created_at) - new Date(b.created_at),
+  updated: (a, b) => new Date(b.updated_at) - new Date(a.updated_at),
+  // life = time from creation to last update, longest first
+  life: (a, b) =>
+    new Date(b.updated_at) -
+    new Date(b.created_at) -
+    (new Date(a.updated_at) - new Date(a.created_at)),
+  stars: (a, b) => (b.stargazers_count || 0) - (a.stargazers_count || 0),
+};
+
+const timelineSortKey = "gh-projects-timeline-sort";
+
+let timelineSort = (() => {
+  try {
+    const stored = localStorage.getItem(timelineSortKey);
+    return TIMELINE_SORTS[stored] ? stored : "created";
+  } catch (e) {
+    return "created";
+  }
+})();
+
+const setTimelineSort = (sort) => {
+  if (!TIMELINE_SORTS[sort] || sort === timelineSort) {
+    return;
+  }
+  timelineSort = sort;
+  try {
+    localStorage.setItem(timelineSortKey, sort);
+  } catch (e) {
+    // private browsing, the choice just does not stick
+  }
+  renderTimelineChart();
+};
+
+// each project as a span, from the day it started to its last update,
+// next to its number of stars
 const timelineChartData = () => {
   const list = [...repos].sort(
-    (a, b) => new Date(a.created_at) - new Date(b.created_at),
+    (a, b) =>
+      TIMELINE_SORTS[timelineSort](a, b) ||
+      new Date(a.created_at) - new Date(b.created_at),
   );
   return {
     labels: list.map((r) => r.name),
@@ -292,18 +331,21 @@ const timelineChartData = () => {
       new Date(r.created_at).getTime(),
       new Date(r.updated_at).getTime(),
     ]),
+    stars: list.map((r) => r.stargazers_count || 0),
   };
 };
 
 const timelineTableHTML = (chartData) => `<table>
-  <thead><tr><th>Project</th><th>Started</th><th>Last updated</th></tr></thead>
+  <thead><tr><th>Project</th><th>Started</th><th>Last updated</th><th>Stars</th></tr></thead>
   <tbody>
     ${chartData.labels
       .map(
         (l, i) =>
           `<tr><td>${escapeHtml(String(l))}</td><td>${fDate(
             chartData.data[i][0],
-          )}</td><td>${fDate(chartData.data[i][1])}</td></tr>`,
+          )}</td><td>${fDate(chartData.data[i][1])}</td><td>${fNum(
+            chartData.stars[i],
+          )}</td></tr>`,
       )
       .join("")}
   </tbody>
@@ -546,7 +588,10 @@ const renderCategoryChart = (key) => {
       el.style.backgroundColor = colors[i];
       el.style.color = textOn(colors[i]);
       el.dataset.value = chartData.data[i];
-      el.title = `${label}: ${chartData.data[i]} ${conf.valueHeader.toLowerCase()}`;
+      el.setAttribute(
+        "aria-label",
+        `${label}: ${chartData.data[i]} ${conf.valueHeader.toLowerCase()}`,
+      );
       const box = document.createElement("div");
       box.className = "morph-label";
       const name = document.createElement("span");
@@ -557,8 +602,15 @@ const renderCategoryChart = (key) => {
       value.textContent = fNum(chartData.data[i]);
       box.append(name, value);
       el.append(box);
-      el.addEventListener("mouseenter", () => morphHover(key, label, true));
-      el.addEventListener("mouseleave", () => morphHover(key, label, false));
+      el.addEventListener("mouseenter", (e) => {
+        morphHover(key, label, true);
+        showMorphTip(e, label, el, conf.valueHeader);
+      });
+      el.addEventListener("mousemove", (e) => moveMorphTip(e));
+      el.addEventListener("mouseleave", () => {
+        morphHover(key, label, false);
+        hideMorphTip();
+      });
       stage.append(el);
       items.set(label, el);
     });
@@ -583,6 +635,35 @@ const renderCategoryChart = (key) => {
     conf.labelHeader,
     conf.valueHeader,
   );
+};
+
+// a tooltip with the name and value, following the mouse (names do not
+// fit in a thin bar or a small slice)
+let morphTip;
+const showMorphTip = (e, label, el, unit) => {
+  if (!morphTip) {
+    morphTip = document.createElement("div");
+    morphTip.className = "morph-tip";
+    document.body.append(morphTip);
+  }
+  const value = el.querySelector(".morph-value")?.textContent || "";
+  morphTip.innerHTML = `<b>${escapeHtml(String(label))}</b><span>${escapeHtml(
+    value,
+  )} ${escapeHtml(unit.toLowerCase())}</span>`;
+  morphTip.hidden = false;
+  moveMorphTip(e);
+};
+const moveMorphTip = (e) => {
+  if (!morphTip || morphTip.hidden) {
+    return;
+  }
+  const x = Math.min(e.clientX + 14, window.innerWidth - morphTip.offsetWidth - 8);
+  morphTip.style.transform = `translate(${x}px, ${e.clientY + 18}px)`;
+};
+const hideMorphTip = () => {
+  if (morphTip) {
+    morphTip.hidden = true;
+  }
 };
 
 // hovering lifts a bar or pulls a slice out of the pie, like in the library
@@ -652,6 +733,10 @@ const renderTimelineChart = () => {
   if (charts.timeline) {
     charts.timeline.destroy();
   }
+  const sortSelect = document.getElementById("sortTimeline");
+  if (sortSelect) {
+    sortSelect.value = timelineSort;
+  }
   const chartData = timelineChartData();
   if (!chartData.labels.length) {
     return;
@@ -659,6 +744,37 @@ const renderTimelineChart = () => {
   // the card grows with the number of projects, a squeezed bar is unreadable
   const wrap = document.getElementById("wrapTimeline");
   wrap.style.height = `${Math.max(280, chartData.labels.length * 24 + 75)}px`;
+  // the blue theme uses its second color for the bars
+  const colorLife =
+    storedTheme() === "evol-blue" ? CHART_ORANGE : CHART_BLUE;
+  const textColor = cssVar("--panel-text", "#333");
+  // the row under the mouse gets a band behind it and bold labels
+  let hoverRow = -1;
+  const rowBand = {
+    id: "rowBand",
+    beforeDatasetsDraw: (chart) => {
+      if (hoverRow < 0) {
+        return;
+      }
+      const y = chart.scales.y;
+      const half =
+        (chart.chartArea.bottom - chart.chartArea.top) / chart.data.labels.length / 2;
+      const mid = y.getPixelForValue(hoverRow);
+      const { ctx } = chart;
+      ctx.save();
+      ctx.globalAlpha = 0.12;
+      ctx.fillStyle = textColor;
+      ctx.fillRect(0, mid - half, chart.width, half * 2);
+      ctx.restore();
+    },
+  };
+  const mutedColor = cssVar("--panel-muted", "#898781");
+  const hoverFont = (ctx) => ({
+    family: Chart.defaults.font.family,
+    size: Chart.defaults.font.size,
+    weight: ctx.index === hoverRow ? "bold" : "normal",
+  });
+  const hoverColor = (ctx) => (ctx.index === hoverRow ? textColor : mutedColor);
   const flat = chartData.data.flat();
   const firstYear = new Date(Math.min(...flat)).getFullYear();
   const lastYear = new Date(Math.max(...flat)).getFullYear();
@@ -673,27 +789,46 @@ const renderTimelineChart = () => {
       datasets: [
         {
           data: chartData.data,
-          backgroundColor: CHART_BLUE,
+          backgroundColor: colorLife,
           borderRadius: 4,
           borderSkipped: false,
           barPercentage: 0.7,
         },
       ],
     },
+    plugins: [rowBand],
     options: {
       indexAxis: "y",
       responsive: true,
       maintainAspectRatio: false,
+      // anywhere on a row counts, not only over its bar
+      interaction: { mode: "index", axis: "y", intersect: false },
+      onHover: (event, elements, chart) => {
+        const { top, bottom } = chart.chartArea;
+        const row =
+          event.type !== "mouseout" && event.y >= top && event.y <= bottom
+            ? Math.round(chart.scales.y.getValueForPixel(event.y))
+            : -1;
+        if (row !== hoverRow) {
+          hoverRow = row;
+          chart.update("none");
+        }
+      },
       plugins: {
         legend: { display: false },
+        // below the row, so it does not cover the bar
         tooltip: {
+          yAlign: "top",
+          caretPadding: 18,
           callbacks: {
             label: (ctx) => `${fDate(ctx.raw[0])} - ${fDate(ctx.raw[1])}`,
           },
         },
       },
       scales: {
+        // years on top, handy when the list is long
         x: {
+          position: "top",
           min: years[0],
           max: years[years.length - 1],
           grid: { display: true },
@@ -706,23 +841,20 @@ const renderTimelineChart = () => {
             callback: (value) => new Date(value).getFullYear(),
           },
         },
-        // same year axis repeated on top, handy when the list is long
-        xTop: {
-          axis: "x",
-          position: "top",
-          min: years[0],
-          max: years[years.length - 1],
+        y: {
           grid: { display: false },
-          afterBuildTicks: (axis) => {
-            axis.ticks = years.map((value) => ({ value }));
-          },
-          ticks: {
-            maxRotation: 0,
-            autoSkip: false,
-            callback: (value) => new Date(value).getFullYear(),
-          },
+          ticks: { font: hoverFont, color: hoverColor },
         },
-        y: { grid: { display: false } },
+        // the stars of each project, on the right side of its row
+        yStars: {
+          type: "category",
+          position: "right",
+          offset: true,
+          labels: chartData.stars.map((n) => `★ ${fNum(n)}`),
+          grid: { display: false },
+          border: { display: false },
+          ticks: { font: hoverFont, color: hoverColor },
+        },
       },
     },
   });
@@ -747,11 +879,8 @@ const renderCharts = () => {
   });
 };
 
-const chartsTitleHTML = () => `<span id="title-main">
-    ${userEditHTML()} ${sitePickerHTML()} ${fansLinkHTML()}
-    <span id="total-stars">${totalHTML()}</span>
-  </span>
-  ${headerLinksHTML("gh-charts")}`;
+const chartsTitleHTML = () =>
+  userHeaderHTML("charts of", totalHTML(), "gh-charts");
 
 const setupChartsPage = async () => {
   chartsPage = true;

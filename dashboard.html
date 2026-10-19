@@ -52,35 +52,27 @@
   </head>
 
   <body onload="setupChartsPage()">
-    <div class="nav">
-      <span class="crumbs">
-        <a id="navUserLink" href="https://evoluteur.github.io/">Evoluteur</a> >
-        Code Projects :  GitHub -
-        <a href="https://evoluteur.github.io/npm-pulse/"> npm</a>
-      </span>
-      </span>
-      <div class="nav-right">
-        <div id="omg-theme-picker"></div>
-        <a
-          class="github-link"
-          href="https://github.com/evoluteur/github-projects-cards"
-          target="_blank"
-          rel="noopener"
-          title="View on GitHub"
-          aria-label="View on GitHub"
-        >
-          <svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true">
-            <path
-              fill="currentColor"
-              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-            />
-          </svg>
-        </a>
-      </div>
+    <div class="nav-right">
+      <div id="omg-theme-picker"></div>
+      <a
+        class="github-link"
+        href="https://github.com/evoluteur/github-projects-cards"
+        target="_blank"
+        rel="noopener"
+        title="View on GitHub"
+        aria-label="View on GitHub"
+      >
+        <svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+          />
+        </svg>
+      </a>
     </div>
 
     <section class="gpc">
-      <h1 id="chartsTitle">Loading...</h1>
+      <div id="chartsTitle">Loading...</div>
       <span id="summary"></span>
 
       <div class="charts-grid">
@@ -120,7 +112,16 @@
         <div class="chart-card wide">
           <div class="chart-head">
             <h2>Projects Started and Last Updated</h2>
-            <span class="chart-toggle" id="toggleTimeline"></span>
+            <span class="chart-head-tools">
+              <label for="sortTimeline">Sort by</label>
+              <select id="sortTimeline" onchange="setTimelineSort(this.value)">
+                <option value="created">Creation date</option>
+                <option value="updated">Last update</option>
+                <option value="life">Life</option>
+                <option value="stars">Stars</option>
+              </select>
+              <span class="chart-toggle" id="toggleTimeline"></span>
+            </span>
           </div>
           <div class="chart-wrap" id="wrapTimeline">
             <canvas id="chartTimeline"></canvas>
@@ -136,6 +137,13 @@
           >GitHub-Projects-Cards</a
         >
         is open source at GitHub with MIT license.
+      </p>
+
+      <p>
+        Encourage this project by
+        <a href="https://github.com/sponsors/evoluteur" target="_blank" rel="noopener"
+          >becoming a sponsor</a
+        >.
       </p>
 
       &#169; 2026

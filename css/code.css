@@ -14,25 +14,112 @@
   justify-content: space-between;
   gap: 20px;
 }
-#title-main > a {
-  text-transform: capitalize;
+#title,
+#chartsTitle {
+  margin: 12px 0 20px;
 }
-.user-input {
-  font-family: inherit;
+/* the user: avatar, "GitHub projects of", @name, totals (like Repo-Atlas) */
+.plate {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 0;
+}
+.avatar {
+  flex: none;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 1px solid var(--card-border);
+  background-color: var(--card-bg);
+}
+.plate-text {
+  min-width: 0;
+}
+.eyebrow {
+  margin: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  > .site-picker {
+    font-size: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    color: var(--heading);
+    border-bottom-width: 1px;
+  }
+}
+.plate-name {
+  margin: 2px 0;
   font-size: 2.5rem;
-  font-weight: inherit;
-  line-height: inherit;
-  color: var(--heading);
-  text-transform: capitalize;
-  background: transparent;
-  border: none;
-  border-bottom: 2px dashed transparent;
-  padding: 0;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+  > a {
+    color: var(--heading);
+  }
+  > a:hover {
+    text-decoration: underline;
+  }
 }
-.user-input:hover,
-.user-input:focus {
-  border-bottom-color: var(--heading);
-  outline: none;
+.plate-stats .stars {
+  font-size: 1rem;
+}
+/* the box to look at another user, and the page icons */
+.plate-side {
+  /* at the bottom of the title, clear of the theme picker above it */
+  align-self: flex-end;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 20px;
+}
+.user-form {
+  display: flex;
+  gap: 8px;
+}
+.field {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  border: 1px solid var(--input-border);
+  border-radius: 6px;
+  background-color: var(--input-bg);
+  > span {
+    padding-left: 10px;
+    font-size: 0.95rem;
+    color: var(--input-text);
+    opacity: 0.6;
+  }
+  > input {
+    width: 160px;
+    min-width: 0;
+    padding: 8px 10px 8px 1px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--input-text);
+    background: transparent;
+    border: 0;
+    outline: none;
+  }
+  &:focus-within {
+    outline: 2px solid var(--link);
+    outline-offset: 1px;
+  }
+}
+.btn {
+  padding: 8px 16px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--input-bg);
+  background-color: var(--heading);
+  border: 1px solid var(--heading);
+  border-radius: 6px;
+  cursor: pointer;
+  &:hover {
+    filter: brightness(1.2);
+  }
 }
 .site-picker {
   /* sized to the selected option where the browser supports it */
@@ -57,28 +144,6 @@
     color: var(--input-text);
     background-color: var(--input-bg);
   }
-}
-.user-edit {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.edit-icon {
-  display: inline-flex;
-  align-items: center;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  color: var(--heading);
-}
-.edit-icon:hover {
-  color: var(--text);
-}
-.edit-icon svg {
-  fill: currentColor;
-  width: 18px;
-  height: 18px;
 }
 .header-links {
   display: inline-flex;
