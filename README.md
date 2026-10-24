@@ -11,7 +11,7 @@ The page displays your projects as cards with the total number of stars.
 
 For each project the card shows the project name, stars, forks, descriptions, language, creation date, and last update, as well as links to the GitHub repo, demo, and [star history](https://www.star-history.com/#evoluteur/github-projects-cards) charts.
 
-Check out the [charts dashboard](https://evoluteur.github.io/github-projects-cards/dashboard.html) for a look at the same repositories from further back: projects by language, by stars, created and updated by month, and a timeline of when each project was started and last updated. The total repo and star count from the cards page is repeated in the header there too.
+Check out the [charts dashboard](https://evoluteur.github.io/github-projects-cards/dashboard.html) for a look at the same repositories from further back: projects by language, by stars, created and updated by month, and a timeline of when each project was started and last committed to. The total repo and star count from the cards page is repeated in the header there too.
 
 You can change the GitHub user displayed on the page by clicking its name in the title and typing a different one, or by adding a `?user=` parameter to the page URL (e.g. `?user=torvalds`) - the same parameter works on the charts dashboard too.
 
