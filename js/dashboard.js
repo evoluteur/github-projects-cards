@@ -281,15 +281,19 @@ const activityChartData = () => {
   };
 };
 
+// date of the last commit: pushed_at is the last push to the repo, unlike
+// updated_at which also changes on stars, description edits, settings...
+const lastCommit = (r) => new Date(r.pushed_at || r.updated_at);
+
 // how the projects are ordered in the timeline chart
 const TIMELINE_SORTS = {
   created: (a, b) => new Date(a.created_at) - new Date(b.created_at),
-  updated: (a, b) => new Date(b.updated_at) - new Date(a.updated_at),
-  // life = time from creation to last update, longest first
+  updated: (a, b) => lastCommit(b) - lastCommit(a),
+  // life = time from creation to last commit, longest first
   life: (a, b) =>
-    new Date(b.updated_at) -
+    lastCommit(b) -
     new Date(b.created_at) -
-    (new Date(a.updated_at) - new Date(a.created_at)),
+    (lastCommit(a) - new Date(a.created_at)),
   stars: (a, b) => (b.stargazers_count || 0) - (a.stargazers_count || 0),
 };
 
@@ -317,7 +321,7 @@ const setTimelineSort = (sort) => {
   renderTimelineChart();
 };
 
-// each project as a span, from the day it started to its last update,
+// each project as a span, from the day it started to its last commit,
 // next to its number of stars
 const timelineChartData = () => {
   const list = [...repos].sort(
@@ -329,14 +333,14 @@ const timelineChartData = () => {
     labels: list.map((r) => r.name),
     data: list.map((r) => [
       new Date(r.created_at).getTime(),
-      new Date(r.updated_at).getTime(),
+      lastCommit(r).getTime(),
     ]),
     stars: list.map((r) => r.stargazers_count || 0),
   };
 };
 
 const timelineTableHTML = (chartData) => `<table>
-  <thead><tr><th>Project</th><th>Started</th><th>Last updated</th><th>Stars</th></tr></thead>
+  <thead><tr><th>Project</th><th>Started</th><th>Last commit</th><th>Stars</th></tr></thead>
   <tbody>
     ${chartData.labels
       .map(
