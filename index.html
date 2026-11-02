@@ -125,7 +125,20 @@
       <div class="filters">
         <div>
           <label for="filter">Find</label>
-          <input type="text" onkeyup="filter(this.value)" id="filter" />
+          <span class="find-box">
+            <input type="text" oninput="filter(this.value)" id="filter" />
+            <button
+              type="button"
+              class="find-clear"
+              id="filterClear"
+              onclick="clearFilter()"
+              aria-label="Clear"
+              title="Clear"
+              hidden
+            >
+              &times;
+            </button>
+          </span>
         </div>
         <div>
           <label for="langFilter">Language</label>

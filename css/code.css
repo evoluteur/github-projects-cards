@@ -279,6 +279,39 @@
     border: 1px solid var(--input-border);
     border-radius: 4px;
   }
+  /* the find box, with an x to clear it on the right */
+  .find-box {
+    position: relative;
+    display: inline-block;
+    > input {
+      padding-right: 32px;
+    }
+  }
+  .find-clear {
+    position: absolute;
+    top: 0;
+    bottom: 10px; /* the input's margin-bottom */
+    right: 4px;
+    width: 26px;
+    height: 26px;
+    margin: auto 0;
+    padding: 0;
+    font-size: 20px;
+    line-height: 1;
+    color: var(--input-text);
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    opacity: 0.6;
+    cursor: pointer;
+    &:hover,
+    &:focus-visible {
+      opacity: 1;
+    }
+    &[hidden] {
+      display: none;
+    }
+  }
 }
 #summary {
   margin-left: 20px;

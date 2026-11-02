@@ -58,6 +58,7 @@ const resetFilters = () => {
   searchText = "";
   languageFilter = "";
   document.getElementById("filter").value = "";
+  showFilterClear();
   populateLanguageFilter();
 };
 
@@ -145,9 +146,25 @@ const applyFilters = () => {
   setRepos(render(reposSelection));
 };
 
+// the x in the find box shows only when there is something to clear
+const showFilterClear = () => {
+  const btn = document.getElementById("filterClear");
+  if (btn) {
+    btn.hidden = !searchText;
+  }
+};
+
 const filter = (searchString) => {
   searchText = searchString;
+  showFilterClear();
   applyFilters();
+};
+
+const clearFilter = () => {
+  const input = document.getElementById("filter");
+  input.value = "";
+  filter("");
+  input.focus();
 };
 
 const filterByLanguage = (lang) => {
