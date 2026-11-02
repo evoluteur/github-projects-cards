@@ -109,7 +109,7 @@ const changeUser = async (newUser) => {
       setBackLink();
     } else {
       resetFilters();
-      sort(localStorage.getItem("gh-projects-sort") || "name");
+      sort(savedSort() || "name");
     }
     updateBookmarkableUrl();
     setPageMetaTitle();
@@ -134,6 +134,16 @@ const escapeHtml = (txt) =>
     .replace(/'/g, "&#039;");
 
 const fDate = (d) => new Date(d).toDateString().substring(4);
+
+// date of the last commit: pushed_at is the last push to the repo, unlike
+// updated_at which also changes on stars, description edits, settings...
+const lastCommit = (r) => new Date(r.pushed_at || r.updated_at);
+
+// the saved sort; "updated_at" was replaced by "pushed_at" (last commit)
+const savedSort = () => {
+  const field = localStorage.getItem("gh-projects-sort");
+  return field === "updated_at" ? "pushed_at" : field;
+};
 
 const applyFilters = () => {
   // the find box matches project names regardless of case
@@ -175,9 +185,10 @@ const filterByLanguage = (lang) => {
 const sort = (field) => {
   localStorage.setItem("gh-projects-sort", field);
   const fEx = field === "name" ? 1 : -1;
+  const value = (r) => (field === "pushed_at" ? lastCommit(r).getTime() : r[field]);
   reposSelection = reposSelection.sort((a, b) => {
-    const af = a[field];
-    const bf = b[field];
+    const af = value(a);
+    const bf = value(b);
     if (af === bf) {
       return 0;
     }
@@ -340,7 +351,7 @@ const cardHTML = (name, project) => `<div class="project-card">
     <div class="desc">${escapeHtml(project?.description || name)}</div>
     <div class="p-links">${linksHTML(project)}</div>
   </div>
-  <div>${fDate(project.created_at)} - ${fDate(project.updated_at)}</div>
+  <div>${fDate(project.created_at)} - ${fDate(lastCommit(project))}</div>
 </div>`;
 
 const totalHTML = () =>
@@ -441,7 +452,7 @@ const setupCodePage = async () => {
   if (userParam) {
     user = userParam.trim() || user;
   }
-  const sortField = localStorage.getItem("gh-projects-sort");
+  const sortField = savedSort();
   if (sortField) {
     document.getElementById("sortPicker").value = sortField;
   }

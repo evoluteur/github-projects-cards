@@ -251,13 +251,13 @@ const starsChartData = (limit = 15) => {
   };
 };
 
-// projects created and updated, month by month, on the same time line
+// projects created and last committed to, month by month, on the same time line
 const activityChartData = () => {
   const created = {};
   const updated = {};
   repos.forEach((r) => {
     const c = monthKey(r.created_at);
-    const u = monthKey(r.updated_at);
+    const u = monthKey(lastCommit(r));
     created[c] = (created[c] || 0) + 1;
     updated[u] = (updated[u] || 0) + 1;
   });
@@ -273,17 +273,13 @@ const activityChartData = () => {
         color: CHART_BLUE,
       },
       {
-        label: "Updated",
+        label: "Last commit",
         data: keys.map((k) => updated[k] || 0),
         color: CHART_ORANGE,
       },
     ],
   };
 };
-
-// date of the last commit: pushed_at is the last push to the repo, unlike
-// updated_at which also changes on stars, description edits, settings...
-const lastCommit = (r) => new Date(r.pushed_at || r.updated_at);
 
 // how the projects are ordered in the timeline chart
 const TIMELINE_SORTS = {
