@@ -327,6 +327,7 @@ const timelineChartData = () => {
   );
   return {
     labels: list.map((r) => r.name),
+    urls: list.map((r) => r.html_url || `https://github.com/${r.full_name}`),
     data: list.map((r) => [
       new Date(r.created_at).getTime(),
       lastCommit(r).getTime(),
@@ -341,7 +342,11 @@ const timelineTableHTML = (chartData) => `<table>
     ${chartData.labels
       .map(
         (l, i) =>
-          `<tr><td>${escapeHtml(String(l))}</td><td>${fDate(
+          `<tr><td><a href="${escapeHtml(
+            chartData.urls[i],
+          )}" target="_blank" rel="noopener">${escapeHtml(
+            String(l),
+          )}</a></td><td>${fDate(
             chartData.data[i][0],
           )}</td><td>${fDate(chartData.data[i][1])}</td><td>${fNum(
             chartData.stars[i],
@@ -768,6 +773,25 @@ const renderTimelineChart = () => {
       ctx.restore();
     },
   };
+  // the project names on the left are links to their repos; a plugin
+  // because onClick/onHover only fire inside the chart area
+  const labelLinks = {
+    id: "labelLinks",
+    afterEvent: (chart, args) => {
+      const { event } = args;
+      const { top, bottom, left } = chart.chartArea;
+      const onLabel =
+        event.x < left && event.y >= top && event.y <= bottom;
+      const row = onLabel
+        ? Math.round(chart.scales.y.getValueForPixel(event.y))
+        : -1;
+      const url = chartData.urls[row];
+      chart.canvas.style.cursor = url ? "pointer" : "";
+      if (url && event.type === "click") {
+        window.open(url, "_blank", "noopener");
+      }
+    },
+  };
   const mutedColor = cssVar("--panel-muted", "#898781");
   const hoverFont = (ctx) => ({
     family: Chart.defaults.font.family,
@@ -796,7 +820,7 @@ const renderTimelineChart = () => {
         },
       ],
     },
-    plugins: [rowBand],
+    plugins: [rowBand, labelLinks],
     options: {
       indexAxis: "y",
       responsive: true,
